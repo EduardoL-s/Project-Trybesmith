@@ -1,5 +1,5 @@
 import usersModel from '../models/users.model';
-import generateToken from '../utils/auth';
+import { generateToken } from '../utils/auth';
 
 async function loginAuthenticate(username: string, password: string) {
   const [checkUsername] = await usersModel.findByUsername(username, password);

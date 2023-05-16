@@ -10,4 +10,11 @@ async function insertProduct(name: string, amount: string) {
   return product;
 }
 
-export default { getAll, insertProduct };
+async function updateProducts(orderId: number, idProduct: number[]) {
+  const result = await Promise.all(idProduct
+    .map((id) => productsModel.updateProduct(orderId, id)));
+
+  return result;
+}
+
+export default { getAll, insertProduct, updateProducts };
