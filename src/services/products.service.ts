@@ -5,4 +5,9 @@ async function getAll() {
   return products;
 }
 
-export default { getAll };
+async function insertProduct(name: string, amount: string) {
+  const product = productsModel.insertProduct(name, amount);
+  return product;
+}
+
+export default { getAll, insertProduct };

@@ -6,4 +6,10 @@ async function getAll(req: Request, res: Response) {
   return res.status(200).json(result);
 }
 
-export default { getAll };
+async function insertProduct(req: Request, res: Response) {
+  const { name, amount } = req.body;
+  const result = await productsService.insertProduct(name, amount);
+  return res.status(201).json(result);
+}
+
+export default { getAll, insertProduct };
