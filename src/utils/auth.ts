@@ -1,5 +1,4 @@
 import jwt, { SignOptions } from 'jsonwebtoken';
-import { Users } from '../types/users';
 
 const secretKey = process.env.JWT_SECRET as string;
 const configJWT: SignOptions = {
@@ -7,7 +6,8 @@ const configJWT: SignOptions = {
   algorithm: 'HS256',
 };
 
-const generateToken = (payload: Users) => {
+const generateToken = (id: number, username: string) => {
+  const payload = { id, username };
   const token = jwt.sign(payload, secretKey, configJWT);
   return token;
 };

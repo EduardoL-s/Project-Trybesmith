@@ -1,4 +1,4 @@
-import { ResultSetHeader } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import { Users } from '../types/users';
 import connection from './connection';
 
@@ -21,4 +21,13 @@ async function insertNewUser(user: Users): Promise<Users> {
   return newUser as Users;
 }
 
-export default { insertNewUser };
+async function findByUsername(username: string, password: string): Promise<Users[]> {
+  const [userRow] = await connection.execute<RowDataPacket[]>(`
+  SELECT * FROM Trybesmith.users
+  WHERE username=(?) AND password=(?)
+  `, [username, password]);
+
+  return userRow as Users[];
+}
+
+export default { insertNewUser, findByUsername };
